@@ -1,0 +1,7 @@
+.venv
+venv
+.idea
+!app/resources/.keep
+app/resources/*/*
+*.pyc
+**/__pycache__
