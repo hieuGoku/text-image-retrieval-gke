@@ -1,20 +1,32 @@
+import os
 import torch
 from PIL import Image
 import numpy as np
 from transformers import AutoProcessor, AutoTokenizer
 import onnxruntime as ort
+from huggingface_hub import login, snapshot_download
 
+from app.core.config import config
 from app.logger.logger import custom_logger
+
+if not os.listdir(config.MODEL_DIR):
+    custom_logger.info("Model dir is empty, downloading models ...")
+    login(config.HUGGINGFACE_API_KEY)
+    snapshot_download(
+        repo_id="hieuGoku/siglip_onnx",
+        local_dir=config.MODEL_DIR,
+    )
+    custom_logger.info("Downloaded models")
 
 # load the model and the tokenizer
 ort_vision = ort.InferenceSession(
-    "app/resources/models/siglip_vision.onnx",
+    f"{config.MODEL_DIR}/siglip_vision.onnx",
     providers=["CPUExecutionProvider"],
 )
 custom_logger.info("Loaded vision model")
 
 ort_text = ort.InferenceSession(
-    "app/resources/models/siglip_text.onnx",
+    f"{config.MODEL_DIR}/siglip_text.onnx",
     providers=["CPUExecutionProvider"],
 )
 custom_logger.info("Loaded text model")

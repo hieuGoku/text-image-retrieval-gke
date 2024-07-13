@@ -20,6 +20,9 @@ class Config:
     # data dir
     DATA_DIR = os.getenv("DATA_DIR")
 
+    # model dir
+    MODEL_DIR = os.getenv("MODEL_DIR")
+
     # bucket
     BUCKET_NAME = os.getenv("BUCKET_NAME")
 
