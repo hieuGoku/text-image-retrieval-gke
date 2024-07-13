@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: retrieval_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${FASTAPI_ENV:-production}
+    restart: on-failure
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    networks:
+      - retrieval_network
+    env_file:
+      - .env
+
+networks:
+  retrieval_network:
+    name: retrieval_network
+    driver: bridge
