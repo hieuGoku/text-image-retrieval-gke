@@ -23,10 +23,7 @@ class PrepareData:
         self.image_dir = os.path.join(config.DATA_DIR, "art_dataset")
 
     def download_data(self):
-        if not os.path.exists(self.parquet_dir):
-            custom_logger.info("Creating parquet directory ...")
-            os.makedirs(self.parquet_dir)
-            custom_logger.info(f"Parquet directory created at {self.parquet_dir}")
+        os.makedirs(self.parquet_dir, exist_ok=True)
 
         if not os.path.exists(f"{self.parquet_dir}/data.parquet"):
             custom_logger.info("Downloading data ...")
