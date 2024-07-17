@@ -1,3 +1,7 @@
+# https://github.com/tiangolo/uvicorn-gunicorn-docker/blob/master/docker-images/start.sh
+# https://github.com/Swiple/swiple/blob/main/backend/Dockerfile
+# https://github.com/michaeloliverx/python-poetry-docker-example/blob/master/docker/Dockerfile
+
 # Base Python image
 FROM python:3.10.14-slim AS python-base
 
@@ -66,4 +70,8 @@ RUN apt-get update \
 WORKDIR /retrieval_app
 COPY . ./
 
-CMD ["poetry", "run", "gunicorn", "app.main:app", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8001"]
+RUN chmod +x prestart.sh
+# You must use ./start.sh to run the start.sh file from current directory. /start.sh run start.sh in root /, which does not exist.
+ENTRYPOINT ./prestart.sh $0 $@
+
+CMD ["poetry", "run", "gunicorn", "app.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8001"]
