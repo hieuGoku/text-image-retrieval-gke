@@ -49,9 +49,9 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR /retrieval_app
 COPY . ./
 
-EXPOSE 8001
+EXPOSE 30000
 
-CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "30000", "--reload"]
 
 # Production stage
 FROM python-base AS production
@@ -74,4 +74,4 @@ RUN chmod +x prestart.sh
 # You must use ./start.sh to run the start.sh file from current directory. /start.sh run start.sh in root /, which does not exist.
 ENTRYPOINT ./prestart.sh $0 $@
 
-CMD ["poetry", "run", "gunicorn", "app.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8001"]
+CMD ["poetry", "run", "gunicorn", "app.main:app", "--preload", "--timeout", "120", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:30000"]

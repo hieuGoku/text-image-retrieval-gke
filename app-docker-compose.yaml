@@ -9,9 +9,9 @@ services:
       target: ${FASTAPI_ENV:-production}
     restart: on-failure
     ports:
-      - "8001:8001"
+      - "30000:30000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/"]
+      test: ["CMD", "curl", "-f", "http://localhost:30000/"]
       interval: 60s
       timeout: 5s
       retries: 5
