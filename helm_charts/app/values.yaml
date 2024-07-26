@@ -1,0 +1,4 @@
+image:
+  repository: hieugoku/text-image-retrieval-app
+  tag: latest
+  pullPolicy: Always # Should be IfNotPresent when using tag number and Always if latest
