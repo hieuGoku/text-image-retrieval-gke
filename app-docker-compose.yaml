@@ -5,7 +5,7 @@ services:
     container_name: retrieval_app
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-app-serving
       target: ${FASTAPI_ENV:-production}
     restart: on-failure
     ports:
