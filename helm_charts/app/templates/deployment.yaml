@@ -21,8 +21,25 @@ spec:
             - containerPort: 30000
           resources:
             limits:
-              memory: 4096Mi
+              memory: 4608Mi
               cpu: 2
             requests:
-              memory: 3900Mi
-              cpu: 1
+              memory: 1900Mi
+              cpu: 500m
+          env:
+            - name: QDRANT_URL
+              value: {{ .Values.env.QDRANT_URL }}
+            - name: QDRANT_CLOUD_KEY
+              value: {{ .Values.env.QDRANT_CLOUD_KEY }}
+            - name: COLLECTION_NAME
+              value: {{ .Values.env.COLLECTION_NAME }}
+            - name: HUGGINGFACE_API_KEY
+              value: {{ .Values.env.HUGGINGFACE_API_KEY }}
+            - name: DATA_DIR
+              value: {{ .Values.env.DATA_DIR }}
+            - name: MODEL_DIR
+              value: {{ .Values.env.MODEL_DIR }}
+            - name: BUCKET_NAME
+              value: {{ .Values.env.BUCKET_NAME }}
+            - name: IMAGE_URL_TEMPLATE
+              value: {{ .Values.env.IMAGE_URL_TEMPLATE }}
