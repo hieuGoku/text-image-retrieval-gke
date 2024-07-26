@@ -7,7 +7,7 @@ __pycache__/
 art_dataset/
 parquet/
 siglip/
-ansible/secrets/
+ansible/secrets/*json
 
 # C extensions
 *.so
