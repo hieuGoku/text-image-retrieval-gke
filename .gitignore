@@ -4,10 +4,10 @@ __pycache__/
 *$py.class
 
 *.onnx
-*.json
 art_dataset/
 parquet/
 siglip/
+ansible/secrets/
 
 # C extensions
 *.so

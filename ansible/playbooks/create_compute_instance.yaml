@@ -1,0 +1,59 @@
+- name: Create a Compute Engine instance
+  hosts: localhost
+  tasks:
+    - name: Create a disk
+      gcp_compute_disk:
+        name: disk-instance
+        size_gb: 50
+        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20230727
+        zone: us-central1-a
+        project: mlops-430311
+        auth_kind: serviceaccount
+        service_account_file: ../secrets/mlops-430311-f4c0a77dd919.json
+        state: present
+      register: disk
+
+    - name: Start an instance
+      gcp_compute_instance:
+        name: instance-1
+        machine_type: n2-standard-2
+        zone: us-central1-a
+        project: mlops-430311
+        auth_kind: serviceaccount
+        service_account_file: ../secrets/mlops-430311-f4c0a77dd919.json
+
+        disks:
+          - auto_delete: true
+            boot: true
+            source: "{{ disk }}"
+          - auto_delete: 'true'
+            interface: NVME
+            type: SCRATCH
+            initialize_params:
+              disk_type: local-ssd
+
+        network_interfaces:
+          - network:
+              selfLink: global/networks/default
+            access_configs:
+              - name: External NAT
+                type: ONE_TO_ONE_NAT
+        state: present
+
+    - name: Create inbound firewall rule for port 8081 and 50000
+      gcp_compute_firewall:
+        name: allow-port-8081-50000
+        network:
+          selfLink: global/networks/default
+        allowed:
+          - ip_protocol: TCP
+            ports:
+              - 8081
+              - 50000
+        source_ranges:
+          - 0.0.0.0/0
+        direction: INGRESS
+        description: Allow incoming traffic on port 30000
+        project: mlops-430311
+        auth_kind: serviceaccount
+        service_account_file: ../secrets/mlops-430311-f4c0a77dd919.json
