@@ -26,8 +26,7 @@ pipeline {
                 script {
                     echo 'Building image for deployment...'
                     def imageName = "${registry}:v${BUILD_NUMBER}"
-                    def buildArgs = "--build-arg MODEL_DIR=${MODEL_DIR}"
-                    dockerImage = docker.build(imageName, "--file Dockerfile-app-serving ${buildArgs} .")
+                    dockerImage = docker.build(imageName, "--file Dockerfile-app-serving .")
                     echo 'Pushing image to dockerhub...'
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
