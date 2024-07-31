@@ -1,11 +1,11 @@
+import numpy as np
+import onnxruntime as ort
 import torch
 from PIL import Image
-import numpy as np
 from transformers import AutoProcessor, AutoTokenizer
-import onnxruntime as ort
 
-from app.ml.scripts.download_files import download_models
 from app.logger.logger import custom_logger
+from app.ml.scripts.download_files import download_models
 
 siglip_path = download_models()
 

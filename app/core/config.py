@@ -1,6 +1,8 @@
-import os
 import json
+import os
+
 from dotenv import load_dotenv
+
 from app.logger.logger import custom_logger
 
 load_dotenv()

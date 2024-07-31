@@ -1,4 +1,5 @@
 import uuid
+
 import numpy as np
 from qdrant_client.models import PointStruct
 

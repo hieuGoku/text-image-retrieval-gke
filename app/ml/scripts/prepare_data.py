@@ -1,23 +1,23 @@
-import os
 import io
-from uuid import uuid4
-import pandas as pd
-from PIL import Image
-import gdown
+import os
 from pathlib import Path
-from tqdm import tqdm
+from uuid import uuid4
+
+import gdown
+import pandas as pd
 from google.cloud.storage import Client, transfer_manager
+from PIL import Image
+from tqdm import tqdm
 
 from app.api.database import qdrant_execute
-from app.ml.scripts.embedding import Embedding
 from app.core.config import config
 from app.logger.logger import custom_logger
+from app.ml.scripts.embedding import Embedding
 
 embedding = Embedding()
 
 
 class PrepareData:
-
     def __init__(self):
         self.parquet_dir = os.path.join(config.DATA_DIR, "parquet")
         self.image_dir = os.path.join(config.DATA_DIR, "art_dataset")

@@ -34,4 +34,3 @@ class SessionNotFoundError(BaseErrorMessage):
 class UserNotFoundError(BaseErrorMessage):
     status_code = 404
     message = "User not found"
-

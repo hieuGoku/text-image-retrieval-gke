@@ -1,22 +1,23 @@
 from PIL import Image
 
 from app.api.database.qdrant_execute import retrieve
-from app.ml.scripts.embedding import Embedding
 from app.core.config import config
-
+from app.ml.scripts.embedding import Embedding
 
 embedding = Embedding()
 
-class RetrievalService:
 
+class RetrievalService:
     @staticmethod
     def get_urls(results):
         image_ids = [
-            results.points[id].payload["image_id"]
-            for id in range(len(results.points))
+            results.points[id].payload["image_id"] for id in range(len(results.points))
         ]
 
-        urls = [config.IMAGE_URL_TEMPLATE.format(image_id=image_id) for image_id in image_ids]
+        urls = [
+            config.IMAGE_URL_TEMPLATE.format(image_id=image_id)
+            for image_id in image_ids
+        ]
 
         return urls
 

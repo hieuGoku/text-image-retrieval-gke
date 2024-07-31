@@ -28,7 +28,9 @@ class BaseResponse:
         )
 
     @staticmethod
-    def error_response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, message="Error", data=None):
+    def error_response(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, message="Error", data=None
+    ):
         """
         The function `error_response` returns a JSON response with a success status code and message.
 
