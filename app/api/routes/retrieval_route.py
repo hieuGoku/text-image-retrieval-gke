@@ -1,9 +1,10 @@
 import io
-from PIL import Image
-from fastapi import APIRouter, File, UploadFile
 
-from app.api.services.retrieval_service import RetrievalService
+from fastapi import APIRouter, File, UploadFile
+from PIL import Image
+
 from app.api.responses.base import BaseResponse
+from app.api.services.retrieval_service import RetrievalService
 from app.logger.logger import custom_logger
 
 retrieval_service = RetrievalService()
