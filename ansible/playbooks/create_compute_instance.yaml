@@ -1,22 +1,10 @@
 - name: Create a Compute Engine instance
   hosts: localhost
   tasks:
-    - name: Create a disk
-      gcp_compute_disk:
-        name: disk-instance
-        size_gb: 50
-        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20230727
-        zone: us-central1-a
-        project: mlops-430311
-        auth_kind: serviceaccount
-        service_account_file: ../secrets/mlops-430311-f4c0a77dd919.json
-        state: present
-      register: disk
-
     - name: Start an instance
       gcp_compute_instance:
-        name: instance-1
-        machine_type: n2-standard-2
+        name: instance-jenkins
+        machine_type: e2-custom-2-4096
         zone: us-central1-a
         project: mlops-430311
         auth_kind: serviceaccount
@@ -25,12 +13,9 @@
         disks:
           - auto_delete: true
             boot: true
-            source: "{{ disk }}"
-          - auto_delete: 'true'
-            interface: NVME
-            type: SCRATCH
             initialize_params:
-              disk_type: local-ssd
+              source_image: projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20230727
+              disk_size_gb: 25
 
         network_interfaces:
           - network:
