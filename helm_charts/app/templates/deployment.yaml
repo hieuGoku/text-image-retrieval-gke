@@ -22,10 +22,10 @@ spec:
           resources:
             limits:
               memory: 3072Mi
-              cpu: 600m
+              cpu: 400m
             requests:
               memory: 1700Mi
-              cpu: 400m
+              cpu: 100m
           env:
             - name: QDRANT_URL
               value: {{ .Values.env.QDRANT_URL }}
