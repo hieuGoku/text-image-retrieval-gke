@@ -29,6 +29,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
   node_config {
     preemptible  = true
-    machine_type = "n2-standard-2" # 2 CPU and 8 GB RAM
+    machine_type = "e2-custom-2-10240" # 2 CPU and 10 GB RAM
   }
 }
