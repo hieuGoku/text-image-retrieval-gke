@@ -1,0 +1,16 @@
+https://github.com/prometheus-community/helm-charts/issues/851
+https://github.com/prometheus-community/helm-charts/issues/1452
+
+184     additionalPrometheusRules
+
+alertmanager
+    315     config
+    405     ingress
+    765     replicas: 1
+    941     forceEnableClusterMode: true (with 1 replicas)
+
+grafana
+    1000    ingress
+
+prometheus
+    3241    ingress
