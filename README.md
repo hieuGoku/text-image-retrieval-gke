@@ -1,6 +1,27 @@
-pip install -U poetry
+# CI/CD Pipeline To Deploy Text - Image Retrieval
 
-# add torch cpu version https://qiita.com/XPT60/items/894841b57995bef1e81c
-poetry source add -p explicit pytorch https://download.pytorch.org/whl/cpu
-poetry add --source --no-cache pytorch torch torchvision
-poetry add fastapi ...
+## System Pipeline:
+
+![systempipline](images/overview.png)
+
+* Source control: Git/Github
+* CI/CD: Jenkins
+* Model: Huggingface
+* Build API: FastAPI
+* Containerize application: Docker
+* Container orchestration system: Kubernetes/K8S
+* K8s's package manager: Helm
+* Monitoring tool: Prometheus & Grafana
+* Logging: Elasticsearch, Filebeat, Kibana
+* Deliver infrastructure as code: Ansible & Terraform
+* Ingress controller: Nginx ingress
+* Cloud platform: Google cloud platform/GCP
+
+## Flow of application:
+![flowapp](images/detail.png)
+
+## Kubernetes architecture:
+![k8sarchi](images/kubernetes_architecture.png)
+
+## TODOs
+- Using celery for asynchronous tasks
